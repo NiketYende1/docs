@@ -9,7 +9,8 @@ This endpoint exposes non-PII information suitable for analytics dashboards, loa
 **What it does:**
 - Fetches a loan record using its ID
 - Includes public financial metrics and loan lifecycle status
-- Excludes borrower PII and sensitive underwriting details
+- Includes public underwriting details (CashflowsCsv, DealTermsInfo, UnderwritingInfo)
+- Excludes borrower PII and sensitive credit bureau data (PDFs and trade lines)
 
 **When to use it:**
 - When building a public or internal analytics dashboard
@@ -165,6 +166,57 @@ curl -X GET https://your-api.com/loan-data/0x1cb52e0315a448ddb84f1fb3016caf0686a
           "mileage": "40,000",
           "vin": "1HGBH41JXMN109186"
         }
+      },
+      "Underwriting": {
+        "CashflowsCsv": "Month,Scheduled principal payment,Scheduled interest payment,Scheduled payment,Principal paid,Interest paid,Prepay amount,Charge-off amount,Recovered amount,Net loss amount,Servicing fee,Total paid,Gross Cashflow,Total paid (less fees),Net Cashflow,Gross Default (Charge-Off) %,Net Loss %,Delinquent amount,Delinq. Prepay Principal,Delinq. Prepay Interest,Delinq. Default Principal,Delinq. Default Interest,Delinq. One Ahead Default Principal,Delinq. Two Ahead Default Principal,Delinq. One Ahead Default Interest,Delinq. Two Ahead Default Interest,Principal balance,Technology fee,Proportion Default,Proportion Prepay,Starting Remaining Loans,Cumulative charge-off amount,Cumulative net loss amount,Gross charge-off percent,Net loss percent,Date,Original balance,Type,Fees paid (non servicing),Cumulative principal paid,Cumulative interest paid,Cumulative recovered amount,Cumulative total servicing fee,Cumulative total fees paid (non servicing),Cumulative total paid,Cumulative total paid (less fees),Cumulative net cashflow,Month\n0,0.0,0.0,0.0,0.0,0.0,0.0,-34025.0,0.0,-34025.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,34025.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2025-12-11,34025.0,Projected,0,0.0,0.0,0.0,0.0,0,0.0,0.0,1.0,0.0,59\n...",
+        "DealTermsInfo": [
+          {
+            "ApprovedDownPayment": "1443.75",
+            "TermsAPR": "0.0783",
+            "TermsDTI": "0.11213880725221191",
+            "TermsFrontEndLTV": "1.1",
+            "TermsLTV": "1.1",
+            "TermsLoanAmount": "28875.0",
+            "TermsMonthlyPayment": "1303.700388839596",
+            "TermsPTI": "0.1064245215379262",
+            "TermsTerm": "24.0"
+          }
+        ],
+        "UnderwritingInfo": [
+          {
+            "AllWarnings": "",
+            "CollateralDefaultProb": "0.025768364019160397",
+            "DecisionReason": "",
+            "DecisionReasonSimple": "",
+            "DecisionStatus": "APPROVED",
+            "DefaultProb": "0.0038391412595749734",
+            "FairValuePrice": "1.01",
+            "ForecastChargeoffAmount": "53.64759247686432",
+            "ForecastCompoundingIRR": "0.13345275863242834",
+            "ForecastCompoundingNetIRR": "0.09483225736178147",
+            "ForecastFairValuePrice": "1.040644729219909",
+            "ForecastInterestPaid": "4819.160498780415",
+            "ForecastNetLossAmount": "35.020800528969865",
+            "ForecastPresentValue": "29751.105501212747",
+            "ForecastPrincipalPaid": "28821.352407523133",
+            "ForecastRecoveredAmount": "18.626791947894457",
+            "ForecastSimpleIRR": "0.12592463545450983",
+            "ForecastSimpleNetIRR": "0.0909440480803152",
+            "ForecastTotalPaid": "33659.13969825145",
+            "ForecastTotalPaidLessFees": "32330.15064727478",
+            "SolventProb": "0.996160858740425",
+            "TermsApprovedBackEndProducts": "0.0",
+            "TermsApprovedFrontEndAmt": "28875.0",
+            "TermsApprovedFrontEndLTV": "109.99580968344063",
+            "TermsDealerDiscount": "-0.010000000000000009",
+            "TermsDealerFlat": "288.7500000000003",
+            "TermsDiscountFee": "2.8421709430404007e-13",
+            "TermsFundedAmount": "29163.75",
+            "TermsLoanDiscount": "3.637978807091713e-12",
+            "TermsTotalDiscount": "-288.74999999999636",
+            "WarningsNumber": "0"
+          }
+        ]
       }
     }
   }
